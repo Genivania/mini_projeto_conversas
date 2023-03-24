@@ -573,12 +573,12 @@ const contatos = {
 
 const getContatoUsuario = function (numero) {
   let listaJSON = {}
-
     contatos["whats-users"].forEach(function(dados){
 
       if (numero == dados.number){
         listaJSON.number = dados.number
         listaJSON.name = dados['account']
+
         //listaJSON.image = dados["profile-image"]
         
       }else
