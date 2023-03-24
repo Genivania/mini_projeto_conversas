@@ -589,9 +589,23 @@ const getContatoUsuario = function (numero) {
 //console.log(getContatoUsuario('11987876567'))
 
 const getContatos = function (id) {
- 
-return contatos["whats-users"][id].contacts
+  let listaJSON = {}
+  let listaArray = []
 
+  contatos["whats-users"].forEach(function(dados){
+    if(id == dados.id){
+      dados.contacts.forEach(function(dadosContatos){
+        listaArray.push({
+          name: dadosContatos.name,
+          description:dadosContatos.description,
+          image:dadosContatos.image,
+          messages:dadosContatos.messages
+        })
+      })
+    }
+    listaJSON.id = listaArray
+  })
+  return listaJSON
 }
 //console.log(getContatos('3'))
 
