@@ -64,12 +64,29 @@ app.get('/v1/whatsapp/usuario', cors(), async function(request, response, next){
 //console.log(contatos.getContatoUsuario('11987876567'))
 
 
-app.get('/v1/whatsapp/contato', cors(), async function(request, response, next){
+app.get('/v1/whatsapp/mensagem', cors(), async function(request, response, next){
 
     let idContato = request.query.id;
     let statusCode;
     let dadosContato = {};
     
+    if (idContato == '' || idContato == undefined || isNaN(idContato)) {
+        statusCode = 400;
+        dadosContato.message = "Não é possivel processar a requisição pois não atende a quantidade de caracteres ";
+    } else {
+        //Chama a função que filtra o estado pela sigla
+        let contato = contatos.getContatos(idContato);
+
+        //Valida se houve retorno válido da função
+        if (contato) {
+            statusCode = 200; // Estado encontrado
+            dadosContato = contato;
+        } else {
+            statusCode = 404; // Estado não encontrado
+        }
+    }
+    response.status(statusCode);
+    response.json(dadosContato);
 }); 
 
 //permite carregar os endpoint criados e aguardar as requisições

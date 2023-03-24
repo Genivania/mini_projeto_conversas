@@ -593,7 +593,7 @@ const getContatos = function (id) {
 return contatos["whats-users"][id].contacts
 
 }
-
+//console.log(getContatos('3'))
 
 module.exports = {
   getContatoUsuario,
